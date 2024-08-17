@@ -3,64 +3,69 @@ import pandas as pd
 
 # user input
 def input_params():
-    csv_path = '../csvFiles/filtered_recordings_Olly.csv'
-    output_path = '../csvFiles/filtered_recordings_Olly.csv'
+    csv_file = '../csvFiles/filtered_recordings_Olly.csv'
+    output_path = '../csvFiles/check.csv'
+    should_drop = True  # should drop ['TSKN', 'TRLN', 'BLKN', 'TASK'] columns
 
-    return csv_path, output_path # do NOT change
+    return csv_file, output_path, should_drop  # do NOT change
 
 
-def compress_csv_file(df):
+def compress_csv_file(df, should_drop):
+    df = drop_cols(df, should_drop)
 
-    return df
+    numeric_columns = [col for col in df.columns if col not in ['SUBJ', 'SESS', 'WORD', 'COND', 'cut_WORD']]
+    print(numeric_columns)
 
-# Load the CSV file
-csv_file_path = 'csv_files/segments_features_and_all_features_with_participants_logs_with_difficulty.csv'
-df_copy = pd.read_csv(csv_file_path)
+    result = pd.DataFrame(
+        columns=['SUBJ', 'SESS', 'WORD', 'COND', 'recordings_number'] +
+                [f'{col}_mean' for col in numeric_columns] +
+                [f'{col}_std' for col in numeric_columns])
 
-# Drop columns starting with 'Unnamed', 'TSKN', 'TRLN', 'BLKN', 'TASK', 'File_name'
-columns_to_drop = [col for col in df_copy.columns if
-                   col.startswith(('Unnamed', 'TSKN', 'TRLN', 'BLKN', 'TASK', 'File_name'))]
-df_copy = df_copy.drop(columns=columns_to_drop)
+    grouped = df.groupby(['SUBJ', 'SESS', 'WORD'], as_index=False)
 
-# Group by 'SUBJ', 'SESS', 'WORD'
-grouped = df_copy.groupby(['SUBJ', 'SESS', 'WORD'], as_index=False)
+    # Iterate over each group
+    for name, group in grouped:
+        # Save the original values of 'SUBJ', 'SESS', and 'WORD'
+        subj, sess, word = name
+        cond = group.iloc[0]['COND']
 
-# Get all numeric columns (excluding 'SUBJ', 'SESS', 'WORD')
-columns = [col for col in df_copy.columns if col not in ['SUBJ', 'SESS', 'WORD', 'COND']]
+        # Calculate the number of recordings in the group
+        recordings_number = len(group)
 
-# Initialize an empty DataFrame to store the final results
-final_data = pd.DataFrame(
-    columns=['SUBJ', 'SESS', 'WORD', 'COND', 'recordings_number'] +
-            [f'{col}_mean' for col in columns] + [f'{col}_std' for col in columns])
+        # Drop 'SUBJ', 'SESS', and 'WORD' columns
+        group = group.drop(columns=['SUBJ', 'SESS', 'WORD', 'COND', 'cut_WORD'])
 
-# Iterate over each group
-for name, group in grouped:
-    # Save the original values of 'SUBJ', 'SESS', and 'WORD'
-    subj, sess, word = name
-    cond = group.iloc[0]['COND']
+        # Calculate mean and std for numeric columns
+        means, stds = group.mean(), group.std()
 
-    # Calculate the number of recordings in the group
-    recordings_number = len(group)
+        # Create a new row for the final DataFrame
+        new_row = pd.DataFrame([[subj, sess, word, cond, recordings_number] + list(means) + list(stds)],
+                               columns=['SUBJ', 'SESS', 'WORD', 'COND', 'recordings_number'] +
+                                       [f'{col}_mean' for col in numeric_columns] +
+                                       [f'{col}_std'  for col in numeric_columns])
 
-    # Drop 'SUBJ', 'SESS', and 'WORD' columns
-    group = group.drop(columns=['SUBJ', 'SESS', 'WORD', 'COND'])
+        # Append the new row to the final DataFrame
+        result = pd.concat([result, new_row], ignore_index=True)
 
-    # Calculate mean and std for numeric columns
-    means = group.mean()
-    stds = group.std()
+    return result
 
-    # Create a new row for the final DataFrame
-    new_row = pd.DataFrame([[subj, sess, word, cond, recordings_number] + list(means) + list(stds)],
-                           columns=['SUBJ', 'SESS', 'WORD', 'COND', 'recordings_number'] + [f'{col}_mean' for col in
-                                                                                    columns] + [f'{col}_std' for
-                                                                                                        col in
-                                                                                                        columns])
 
-    # Append the new row to the final DataFrame
-    final_data = pd.concat([final_data, new_row], ignore_index=True)
+def drop_cols(df, should_drop):
+    might_drop = ['TSKN', 'TRLN', 'BLKN', 'TASK']
+    drop = ['File_name']
 
-# Save the processed data to a new CSV file
-output_csv_file_path = 'csv_files/compressed_csv_file.csv'
-final_data.to_csv(output_csv_file_path, index=False)
+    if should_drop:
+        drop.extend(might_drop)
 
-print("Processing completed. Output saved to", output_csv_file_path)
+    return df.drop(columns=drop)
+
+
+def main():
+    csv_file, output_path, should_drop = input_params()
+    df = pd.read_csv(csv_file).copy()
+    df = compress_csv_file(df, should_drop)
+    df.to_csv(output_path, index=False)
+
+
+if __name__ == "__main__":
+    main()
