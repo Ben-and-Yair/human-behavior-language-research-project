@@ -2,14 +2,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
+
 # user input
-def inputParams():
-    csvPath = '../csvFiles/filtered_recordings_Olly.csv'
+def input_params():
+    csv_path = '../csvFiles/filtered_recordings_Olly.csv'
     features = ['SESS', 'Reaction_time(s)', 'Total_duration(s)'] # do NOT remove SESS from the list
     sess = [1, 4]  # SESSions to plot
     should_normalize = True
 
-    return csvPath, features, sess, should_normalize
+    return csv_path, features, sess, should_normalize
 
 
 def normalize_df(df, should_normalize):
@@ -19,10 +20,10 @@ def normalize_df(df, should_normalize):
                 df[column] = (df[column] - df[column].mean()) / df[column].mean()
     return df
 
+
 def plot_feature_boxplot(df, title):
     sns.set(style="ticks")
     fig, ax = plt.subplots(1, figsize=(10, 10))
-
     df_melted = pd.melt(df, id_vars=['SESS'], value_vars=list(df.columns))
     p = sns.boxplot(x="variable", y="value", hue='SESS', data=df_melted, palette="Pastel1", showfliers=False)
     labels = [label.get_text() for label in ax.get_xticklabels()]
@@ -33,11 +34,15 @@ def plot_feature_boxplot(df, title):
     plt.show()
 
 
-csvFile, features, sess, should_normalize = inputParams()
-df = pd.read_csv(csvFile)
-df = df[features]
-df = df[df['SESS'].isin(sess)]
+def main():
+    csv_file, features, sess, should_normalize = input_params()
+    df = pd.read_csv(csv_file)
+    df = df[features]
+    df = df[df['SESS'].isin(sess)]
 
-df = normalize_df(df, should_normalize)
-plot_feature_boxplot(df, "features box plots")
+    df = normalize_df(df, should_normalize)
+    plot_feature_boxplot(df, "features box plots")
 
+
+if __name__ == "__main__":
+    main()
