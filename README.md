@@ -11,5 +11,6 @@
 ### Project
 1. *Slicing*: ----
 2. *Measure*: ---
+3. *Compress*: note that ['TSKN', 'TRLN', 'BLKN', 'TASK'] columns might be dropped. moreover, any non-numeric column will araise an error. 'cut_WORD' is dropped.
 
 ### Graphs and statistics
