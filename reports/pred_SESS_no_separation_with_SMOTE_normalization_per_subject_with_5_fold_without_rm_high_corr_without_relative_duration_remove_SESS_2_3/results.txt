@@ -1,0 +1,48 @@
+no. of remaining features: 43
+remaining features: ['WORD', 'COND', 'Reaction_time(s)', 'Total_duration(s)', 'duration', 'meanIntesnity', 'stddevIntensity', 'meanPitch', 'stddevPitch', 'HNR', 'localJitter', 'localabsoluteJitter', 'rapJitter', 'ppq5Jitter', 'ddpJitter', 'localShimmer', 'localdbShimmer', 'apq3Shimmer', 'apq5Shimmer', 'apq11Shimmer', 'ddaShimmer', 'f1_mean', 'f2_mean', 'f3_mean', 'f4_mean', 'f1_median', 'f2_median', 'f3_median', 'f4_median', 'JitterPCA', 'ShimmerPCA', 'fitch_vtl', 'type', 's_first_intensity_mean', 's_first_intensity_std', 's_first_pitch_mean', 's_first_pitch_std', 's_first_duration', 's_last_intensity_mean', 's_last_intensity_std', 's_last_pitch_mean', 's_last_pitch_std', 's_last_duration']
+Cross-validation scores: [0.750, 0.742, 0.752, 0.761, 0.763]
+Mean CV accuracy over train set: 0.754
+Accuracy of model on test set: 0.761
+
+Selected Features and Importance Scores:
+{stddevIntensity: 0.123, HNR: 0.041, ShimmerPCA: 0.028, JitterPCA: 0.026, s_first_intensity_mean: 0.024, s_first_intensity_std: 0.023, stddevPitch: 0.021, meanPitch: 0.019, s_last_intensity_std: 0.016, s_last_intensity_mean: 0.016, Reaction_time(s): 0.014, meanIntesnity: 0.004}
+important features in descending order: ['stddevIntensity', 'HNR', 'ShimmerPCA', 'JitterPCA', 's_first_intensity_mean', 's_first_intensity_std', 'stddevPitch', 'meanPitch', 's_last_intensity_std', 's_last_intensity_mean', 'Reaction_time(s)', 'meanIntesnity']
+cut features: ['WORD', 'COND', 'Total_duration(s)', 'duration', 'localJitter', 'localabsoluteJitter', 'rapJitter', 'ppq5Jitter', 'ddpJitter', 'localShimmer', 'localdbShimmer', 'apq3Shimmer', 'apq5Shimmer', 'apq11Shimmer', 'ddaShimmer', 'f1_mean', 'f2_mean', 'f3_mean', 'f4_mean', 'f1_median', 'f2_median', 'f3_median', 'f4_median', 'fitch_vtl', 'type', 's_first_pitch_mean', 's_first_pitch_std', 's_first_duration', 's_last_pitch_mean', 's_last_pitch_std', 's_last_duration']
+
+
+no. of remaining features: 31
+remaining features: ['stddevIntensity', 'HNR', 'ShimmerPCA', 'JitterPCA', 's_first_intensity_mean', 's_first_intensity_std', 'stddevPitch', 'meanPitch', 's_last_intensity_std', 's_last_intensity_mean', 'Reaction_time(s)', 'meanIntesnity', 'WORD', 'COND', 'Total_duration(s)', 'duration', 'localJitter', 'localabsoluteJitter', 'rapJitter', 'ppq5Jitter', 'ddpJitter', 'localShimmer', 'localdbShimmer', 'apq3Shimmer', 'apq5Shimmer', 'apq11Shimmer', 'ddaShimmer', 'f1_mean', 'f2_mean', 'f3_mean', 'f4_mean']
+Cross-validation scores: [0.738, 0.729, 0.739, 0.755, 0.751]
+Mean CV accuracy over train set: 0.742
+Accuracy of model on test set: 0.753
+
+Selected Features and Importance Scores:
+{s_first_intensity_mean: 0.053, s_first_intensity_std: 0.039, meanIntesnity: 0.039, Reaction_time(s): 0.038, JitterPCA: 0.038, s_last_intensity_mean: 0.037, stddevIntensity: 0.033, meanPitch: 0.033, s_last_intensity_std: 0.032, ShimmerPCA: 0.030}
+important features in descending order: ['s_first_intensity_mean', 's_first_intensity_std', 'meanIntesnity', 'Reaction_time(s)', 'JitterPCA', 's_last_intensity_mean', 'stddevIntensity', 'meanPitch', 's_last_intensity_std', 'ShimmerPCA']
+cut features: ['WORD', 'COND', 'Total_duration(s)', 'duration', 'localJitter', 'localabsoluteJitter', 'rapJitter', 'ppq5Jitter', 'ddpJitter', 'localShimmer', 'localdbShimmer', 'apq3Shimmer', 'apq5Shimmer', 'apq11Shimmer', 'ddaShimmer', 'f1_mean', 'f2_mean', 'f3_mean', 'f4_mean']
+
+
+no. of remaining features: 19
+remaining features: ['s_first_intensity_mean', 's_first_intensity_std', 'meanIntesnity', 'Reaction_time(s)', 'JitterPCA', 's_last_intensity_mean', 'stddevIntensity', 'meanPitch', 's_last_intensity_std', 'ShimmerPCA', 'HNR', 'stddevPitch', 'WORD', 'COND', 'Total_duration(s)', 'duration', 'localJitter', 'localabsoluteJitter', 'rapJitter']
+Cross-validation scores: [0.729, 0.731, 0.739, 0.750, 0.742]
+Mean CV accuracy over train set: 0.738
+Accuracy of model on test set: 0.754
+
+Selected Features and Importance Scores:
+{JitterPCA: 0.163, s_last_intensity_mean: 0.072, Reaction_time(s): 0.070, s_first_intensity_mean: 0.055, meanPitch: 0.053, ShimmerPCA: 0.051, meanIntesnity: 0.048}
+important features in descending order: ['JitterPCA', 's_last_intensity_mean', 'Reaction_time(s)', 's_first_intensity_mean', 'meanPitch', 'ShimmerPCA', 'meanIntesnity']
+cut features: ['s_last_intensity_std', 'HNR', 'stddevPitch', 'WORD', 'COND', 'Total_duration(s)', 'duration', 'localJitter', 'localabsoluteJitter', 'rapJitter']
+
+
+no. of remaining features: 10
+remaining features: ['JitterPCA', 's_last_intensity_mean', 'Reaction_time(s)', 's_first_intensity_mean', 'meanPitch', 'ShimmerPCA', 'meanIntesnity', 's_first_intensity_std', 'stddevIntensity', 's_last_intensity_std']
+Cross-validation scores: [0.678, 0.682, 0.690, 0.691, 0.685]
+Mean CV accuracy over train set: 0.685
+Accuracy of model on test set: 0.735
+
+Selected Features and Importance Scores:
+{meanIntesnity: 0.199, JitterPCA: 0.109, Reaction_time(s): 0.083}
+important features in descending order: ['meanIntesnity', 'JitterPCA', 'Reaction_time(s)']
+cut features: ['ShimmerPCA', 's_first_intensity_std', 'stddevIntensity', 's_last_intensity_std']
+
+
