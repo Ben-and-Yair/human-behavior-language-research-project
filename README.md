@@ -1,26 +1,68 @@
-# human-behavior-language-research-project
-## About the project
-Using ML tools to study the language learning process - Part of a research project in Haifa University
+# README
 
-We received the recordings of 42 participants saying different made up words (from 3 artificially constructed vocabularies) over the course of several days. Then, We cleaned up the data (removed silent sections and removed unintelligible recordings), separated each recording to it's syllables, extracted auditory features and then used the random forest classifier to find the distinguishing features of learning (thanks to sklearn's feature selection option we were able to receive a ranking of each feature's importance in the construction of the random forest)
+## Authors
+- **Ben Rofe-Oren**
+- **Yair Slobodin**
 
-The data we worked with is currently unavailable to the public (which is why it isn't in this repository)
+## Supervised By
+- **Hagit Hel-Or**
+- **Tali Bitan**
 
+## About the Project
+This project is a machine learning and human behavior research initiative focused on language learning processes, conducted at the University of Haifa.
 
-## Run the project
-### Installations
-1. install python 3.11 and python IDE (e.g. Pycharm)
-2. install the following packages: seaborn, matplotlib, pandas, parselmouth, numpy, librosa, noisereduce, soundfile, re, shutil, os, unidecode
+In this study, approximately 42 participants engaged in an experiment designed to explore the mechanics of learning a new language, which consisted of three language families (COND): Linear, Non-linear, and Complex. The experiment was structured into four sessions, each comprising three parts: training, testing, and training. During each session, participants listened to a robot pronouncing a word and repeated it five times. The collected data includes participants' audio recordings and an Excel file per participant with basic recording details.
 
-### Project
-1. *Slicing*: The slicing is done by applying noise suppression several times, then finding the loudest point
-     in the recording, then expanding left and right as long as the recording isn't below a certain threshold
-     for too long (determined by the hyperparameters given).
-2. *Measure*: Using both parselmouth (a python API for PRAAT) and librosa to extract a plethora of auditory features (intensity, pitch, formants and more...).
-3. *Segmentation*: Using WebMaus Basic (a site which does forced alignment online) to segment each of the recordings in order to measure the first and last segment of each recording.
-4. *Extracting logs information*: Extracting relevant features (e.g. the session of the recording, the number of subject, whether the participant guessed the meaning of the word correctly, etc.) from the given logs of the experiment.
-5. *Merging the data*: Merging all the csv files created so far into a single csv containing all the relevant information for making predictions.
-6. *Predictions*: ----
-8. *Compress*: note that ['TSKN', 'TRLN', 'BLKN', 'TASK'] columns might be dropped. moreover, any non-numeric column will araise an error. 'cut_WORD' is dropped.
+## What We Did
+1. **Audio Processing**: We trimmed all recordings to isolate the participant's voice.
+2. **Vocal Parameters Calculation**: We calculated vocal parameters using existing code from Git.
+3. **Segmentation**: We segmented the recordings using the WebMAUS website, which provided word-level divisions.
+4. **Prediction Modeling**: We attempted to predict the session (SESS) of each participant based on various vocal parameters using Random Forest and k-fold algorithms.
 
-### Graphs and statistics
+## Additional Explorations
+- Filtered features that showed high correlation with other features to avoid compromising feature ranking.
+- Modified the dataset by session, calculating average values and standard deviations for each feature within a session.
+- Analyzed the recording length parameter for further insights.
+- Added a "difficulty" column to each word, based on the percentage of participants who translated it correctly.
+- Applied various normalization techniques: by session, by participant, by participant and session, and general normalization across all features.
+
+## Running the Project and File Explanations
+
+### Folder Structure
+
+#### csv_files
+[Add explanations for CSV files here.]
+
+#### graphs
+1. **basic_statistics**: Generates plots of basic CSV statistics and saves them in the "basic_statistics_result" directory:
+   - `number_of_recordings_in_each_SESS.png`: Number of recordings in each session (SESS).
+   - `number_of_recordings_in_each_SESS_for_each_COND.png`: Number of recordings in each session for each language family (COND).
+   - `overall_number_of_recordings_in_each_COND.png`: Total number of recordings in each language family (COND).
+   - `number_of_recordings_in_each_ACCR.png`: Number of recordings for each accuracy level (ACCR).
+   - `number_of_accr_0_and_1_by_sess.png`: Number of recordings with accuracy levels 0 and 1, grouped by session.
+
+2. **box_plots.py**: Generates box plots for input features, with an option to normalize the CSV data.
+
+3. **duration_graphs**: Generates the following duration-related graphs:
+   - Average duration difference per word (one consolidated graph).
+   - A graph for each subject, showing the average difference for each word.
+   - A graph for each word, displaying the average difference for each subject.
+   - A graph showing one column per participant, illustrating overall durations.
+   - A graph that represents the average sign of duration differences for each word.
+
+#### main_code
+[Add explanations for main code files here.]
+
+#### recordings
+The recordings of the participants. **Note:** For privacy reasons, audio files will not be uploaded here.
+
+#### sliced_recordings
+The sliced recordings of the participants. **Note:** For privacy reasons, audio files will not be uploaded here.
+
+## List of Features
+[Include a detailed list of all features and columns in the dataset.]
+
+## Special Thanks and Credits
+1. **Oliver Niebuhr** - For meeting with us twice online, offering additional ideas for exploration.
+2. **David Feinberg** - For writing the script used to measure vocal values in recordings. [PraatScripts](https://github.com/drfeinberg/PraatScripts/blob/master/Measure%20Pitch%2C%20HNR%2C%20Jitter%2C%20Shimmer%2C%20and%20Formants.ipynb).
+3. **WebMAUS Site** - For providing segmentation of recordings into word-level segments.
