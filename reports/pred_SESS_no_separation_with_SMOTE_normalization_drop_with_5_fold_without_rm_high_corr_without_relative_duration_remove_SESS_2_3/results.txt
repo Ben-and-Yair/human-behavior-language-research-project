@@ -1,0 +1,24 @@
+no. of remaining features: 8
+remaining features: ['WORD', 'COND', 'Reaction_time(s)', 'Total_duration(s)', 'duration', 'type', 's_first_duration', 's_last_duration']
+Cross-validation scores: [0.590, 0.599, 0.608, 0.600, 0.593]
+Mean CV accuracy over train set: 0.598
+Accuracy of model on test set: 0.649
+
+Selected Features and Importance Scores:
+{Reaction_time(s): 0.118, s_last_duration: 0.032}
+important features in descending order: ['Reaction_time(s)', 's_last_duration']
+cut features: ['WORD', 'COND', 'Total_duration(s)', 'duration', 'type', 's_first_duration']
+
+
+no. of remaining features: 6
+remaining features: ['Reaction_time(s)', 's_last_duration', 'WORD', 'COND', 'Total_duration(s)', 'duration']
+Cross-validation scores: [0.601, 0.606, 0.611, 0.600, 0.604]
+Mean CV accuracy over train set: 0.604
+Accuracy of model on test set: 0.633
+
+Selected Features and Importance Scores:
+{Reaction_time(s): 0.342, s_last_duration: 0.226}
+important features in descending order: ['Reaction_time(s)', 's_last_duration']
+cut features: []
+
+
