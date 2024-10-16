@@ -31,7 +31,11 @@ In this study, approximately 42 participants engaged in an experiment designed t
 ### Folder Structure
 
 #### csv_files
-[Add explanations for CSV files here.]
+   - `sliced_features.csv`: Contains the file name of each recording, reaction time (number of seconds from when the computer finished uttering the word until the participant started speaking), and the total duration (number of seconds it took for the participant to say the word). The CSV was created using `slice_recordings.py`.
+   - `processed_results2.csv`: Contains a list of auditory features (mean and standard deviation of intensity, pitch, medians of formants, another duration calculation, and jitter and shimmer calculations). The CSV was created using `measure_and_extract_auditory_features.py`.
+   - `participants_logs_csv.csv`: Contains a list of features extracted from the Excel files of each participant. This includes additional information on each recording (participant's subject number, session, accuracy, the word said, and more). The CSV was created using `extract_features_from_participants_logs.py`.
+   - `segments_features.csv`: Contains a list of auditory features extracted from the recordings and WebMaus segmentation (the mean and standard deviation of intensity and pitch of the first and last segments, as well as whether the word ends in a consonant or vowel). The CSV was created using `translation_csv_segments_to_features.py`.
+   - `segments_features_and_all_features_with_participants_logs.csv`: Contains all the features in the aforementioned CSV files. This CSV is the main one used for predictions, created using `merging_recordings_and_participants_data.py`.
 
 #### graphs
 1. **basic_statistics**: Generates plots of basic CSV statistics and saves them in the "basic_statistics_result" directory:
