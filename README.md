@@ -31,7 +31,11 @@ In this study, approximately 42 participants engaged in an experiment designed t
 ### Folder Structure
 
 #### csv_files
-[Add explanations for CSV files here.]
+   - `sliced_features.csv`: Contains the file name of each recording, reaction time (number of seconds from when the computer finished uttering the word until the participant started speaking), and the total duration (number of seconds it took for the participant to say the word). The CSV was created using `slice_recordings.py`.
+   - `processed_results2.csv`: Contains a list of auditory features (mean and standard deviation of intensity, pitch, medians of formants, another duration calculation, and jitter and shimmer calculations). The CSV was created using `measure_and_extract_auditory_features.py`.
+   - `participants_logs_csv.csv`: Contains a list of features extracted from the Excel files of each participant. This includes additional information on each recording (participant's subject number, session, accuracy, the word said, and more). The CSV was created using `extract_features_from_participants_logs.py`.
+   - `segments_features.csv`: Contains a list of auditory features extracted from the recordings and WebMaus segmentation (the mean and standard deviation of intensity and pitch of the first and last segments, as well as whether the word ends in a consonant or vowel). The CSV was created using `translation_csv_segments_to_features.py`.
+   - `segments_features_and_all_features_with_participants_logs.csv`: Contains all the features in the aforementioned CSV files. This CSV is the main one used for predictions, created using `merging_recordings_and_participants_data.py`.
 
 #### graphs
 1. **basic_statistics**: Generates plots of basic CSV statistics and saves them in the "basic_statistics_result" directory:
@@ -51,7 +55,31 @@ In this study, approximately 42 participants engaged in an experiment designed t
    - A graph that represents the average sign of duration differences for each word.
 
 #### main_code
-[Add explanations for main code files here.]
+   - `compress_sessions_csv_file.py`:
+   - `extract_features_from_participants_logs.py`: Receives a path to all the excel files containing extra data on each recording (`participants_logs`) and creates a CSV file (`participants_logs_csv_files`) with chosen features.
+   - `measure_and_extract_auditory_features.py`: Accumulation of code from different sources that receive a source directory filled with audio files and
+computes a plethora of auditory features using parselmouth (which uses PRAAT) such as intensity, pitch,
+formants and more. Saves them to `csv_files/processed_results2.csv`.
+   - `merging_recordings_and_participants_data.py`: Takes the given CSV files (`Sliced_features.csv`, `processed_results2.csv`, `segments_features.csv`, `participants_logs_csv.csv`) and merges them to a single CSV file used for predictions (`segments_features_and_all_features_with_participants_logs.csv`).
+   - `normalize.py`: Recevies a CSV file, a list of featuers to normalize, a normalization method and an output directory and creates a new CSV file with the given features normalized according to the given method.
+   - `prepare_files_for_webMaus.py`: Takes the recordings files from the source directory and pairs them with
+a txt contating the word uttered in this recording (both files will have the
+same name). Stores all the files in a single destination directory (given by the user) for convenience.
+   - `random_forest_prediction_no_separation.py`: Reads the given configurations (and iterates over a set of options for parameters), creates a random forest
+classifier, get the most important features and removes a portion of the least important ones. We repeat this
+process until the number of features hits a certain threshold. All the results (and the chosen parameters) are
+stored in a directory named `reports/pred...`.
+   - `random_forest_prediction_with_separation.py`: Reads the given configurations (and iterates over a set of options for parameters), separates the data according to the given feature, creates a random forest
+classifier, get the most important features and removes a portion of the least important ones. We repeat this
+process until the number of features hits a certain threshold. All the results (and the chosen parameters) are
+stored in a directory named `reports/pred...`.
+   - `slice_recordings.py`: Receives as input several hyperparameters, a destination directory and a source directory filled with audio files and
+slices them in order to get only the moment the participant spoke and in order to extract reaction time and duration
+of speaking features for each participant. The code puts all the sliced files in the destination directory (retaining
+ the folder structure of the source directory) and saves a csv named `Sliced_features_cvs` in the `csv_files`.
+ directory
+   - `translation_csv_segmants_to_features.py`: Reads the csv files from segmentation_separation_csv directory, extracts the information
+and calculates the features from the segments, saving it to `csv_files/segments_features.csv`.
 
 #### recordings
 The recordings of the participants. **Note:** For privacy reasons, audio files will not be uploaded here.
