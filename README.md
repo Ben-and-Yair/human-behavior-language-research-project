@@ -35,7 +35,7 @@ In this study, approximately 42 participants engaged in an experiment designed t
    - `processed_results2.csv`: Contains a list of auditory features (mean and standard deviation of intensity, pitch, medians of formants, another duration calculation, and jitter and shimmer calculations). The CSV was created using `measure_and_extract_auditory_features.py`.
    - `participants_logs_csv.csv`: Contains a list of features extracted from the Excel files of each participant. This includes additional information on each recording (participant's subject number, session, accuracy, the word said, and more). The CSV was created using `extract_features_from_participants_logs.py`.
    - `segments_features.csv`: Contains a list of auditory features extracted from the recordings and WebMaus segmentation (the mean and standard deviation of intensity and pitch of the first and last segments, as well as whether the word ends in a consonant or vowel). The CSV was created using `translation_csv_segments_to_features.py`.
-   - `segments_features_and_all_features_with_participants_logs.csv`: Contains all the features in the aforementioned CSV files. This CSV is the main one used for predictions, created using `merging_recordings_and_participants_data.py`.
+   - `segments_features_and_all_features_with_participants_logs.csv`: Contains all the features in the aforementioned CSV files. **This CSV is the main one used for predictions**, created using `merging_recordings_and_participants_data.py`.
 
 #### graphs
 1. **basic_statistics**: Generates plots of basic CSV statistics and saves them in the "basic_statistics_result" directory:
@@ -55,7 +55,7 @@ In this study, approximately 42 participants engaged in an experiment designed t
    - A graph that represents the average sign of duration differences for each word.
 
 #### main_code
-   - `compress_sessions_csv_file.py`:
+   - `compress_sessions_csv_file.py`: generates a new csv file with average and std values for each participant for each session for each word.
    - `extract_features_from_participants_logs.py`: Receives a path to all the excel files containing extra data on each recording (`participants_logs`) and creates a CSV file (`participants_logs_csv_files`) with chosen features.
    - `measure_and_extract_auditory_features.py`: Accumulation of code from different sources that receive a source directory filled with audio files and
 computes a plethora of auditory features using parselmouth (which uses PRAAT) such as intensity, pitch,
@@ -86,9 +86,6 @@ The recordings of the participants. **Note:** For privacy reasons, audio files w
 
 #### sliced_recordings
 The sliced recordings of the participants. **Note:** For privacy reasons, audio files will not be uploaded here.
-
-## List of Features
-[Include a detailed list of all features and columns in the dataset.]
 
 ## Special Thanks and Credits
 1. **Oliver Niebuhr** - For meeting with us twice online, offering additional ideas for exploration.
