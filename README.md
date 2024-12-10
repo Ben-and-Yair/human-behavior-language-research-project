@@ -87,9 +87,6 @@ The recordings of the participants. **Note:** For privacy reasons, audio files w
 #### sliced_recordings
 The sliced recordings of the participants. **Note:** For privacy reasons, audio files will not be uploaded here.
 
-## List of Features
-[Include a detailed list of all features and columns in the dataset.]
-
 ## Special Thanks and Credits
 1. **Oliver Niebuhr** - For meeting with us twice online, offering additional ideas for exploration.
 2. **David Feinberg** - For writing the script used to measure vocal values in recordings. [PraatScripts](https://github.com/drfeinberg/PraatScripts/blob/master/Measure%20Pitch%2C%20HNR%2C%20Jitter%2C%20Shimmer%2C%20and%20Formants.ipynb).
